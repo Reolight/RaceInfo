@@ -186,7 +186,8 @@
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <TableRow>
+                <TableRow
+                    android:id="@+id/NoseRow">
                     <TextView
                         android:id="@+id/NoseMorphText"
                         android:layout_width="wrap_content"
@@ -195,14 +196,15 @@
                         android:fontFamily="sans-serif-condensed-medium"
                         android:textSize="16sp"
                         android:text="@string/nose_morph" />
-                    <Spinner
+                    <com.reolight.raceidentity.support.spinners.ColorSpinner
                         android:id="@+id/NoseMorphSpinner"
                         android:layout_weight="0.5"
                         android:layout_width="wrap_content"
                         android:layout_height="30sp"
                         android:layout_margin="8dp" />
                 </TableRow>
-                <TableRow>
+                <TableRow
+                    android:id="@+id/ForeheadMorphRow">
                     <TextView
                         android:id="@+id/ForeheadMorphText"
                         android:layout_width="wrap_content"
@@ -212,14 +214,15 @@
                         android:fontFamily="sans-serif-condensed-medium"
                         android:text="@string/forehead_morph"
                         />
-                    <Spinner
+                    <com.reolight.raceidentity.support.spinners.ColorSpinner
                         android:id="@+id/ForeheadMorphSpinner"
                         android:layout_weight="0.5"
                         android:layout_width="wrap_content"
                         android:layout_height="30sp"
                         android:layout_margin="8dp"/>
                 </TableRow>
-                <TableRow>
+                <TableRow
+                    android:id="@+id/NapeConvexityRow">
                     <TextView
                         android:id="@+id/NapeConvexityText"
                         android:layout_width="wrap_content"
@@ -229,14 +232,15 @@
                         android:textSize="16sp"
                         android:text="@string/nape_convexity"
                         />
-                    <Spinner
+                    <com.reolight.raceidentity.support.spinners.ColorSpinner
                         android:id="@+id/NapeConvexitySpinner"
                         android:layout_weight="0.5"
                         android:layout_width="wrap_content"
                         android:layout_height="30sp"
                         android:layout_margin="8dp" />
                 </TableRow>
-                <TableRow>
+                <TableRow
+                    android:id="@+id/EyeShapeRow">
                     <TextView
                         android:id="@+id/EyeCutTypeText"
                         android:layout_width="wrap_content"
@@ -245,14 +249,15 @@
                         android:fontFamily="sans-serif-condensed-medium"
                         android:textSize="16sp"
                         android:text="@string/eye_cut_type" />
-                    <Spinner
+                    <com.reolight.raceidentity.support.spinners.ColorSpinner
                         android:id="@+id/EyeCutTypeSpinner"
                         android:layout_weight="0.5"
                         android:layout_width="wrap_content"
                         android:layout_height="30sp"
                         android:layout_margin="8dp" />
                 </TableRow>
-                <TableRow>
+                <TableRow
+                    android:id="@+id/CheekboneWidthRow">
                     <TextView
                         android:id="@+id/CheekboneWidthText"
                         android:layout_width="wrap_content"
@@ -261,14 +266,15 @@
                         android:fontFamily="sans-serif-condensed-medium"
                         android:textSize="16sp"
                         android:text="@string/cheekbone_width" />
-                    <Spinner
+                    <com.reolight.raceidentity.support.spinners.ColorSpinner
                         android:id="@+id/CheekboneWidthSpinner"
                         android:layout_width="wrap_content"
                         android:layout_height="30sp"
                         android:layout_weight="0.5"
                         android:layout_margin="8dp" />
                 </TableRow>
-                <TableRow>
+                <TableRow
+                    android:id="@+id/MandibleWidthRow">
                     <TextView
                         android:id="@+id/MandibleWidthText"
                         android:layout_width="wrap_content"
@@ -277,14 +283,15 @@
                         android:fontFamily="sans-serif-condensed-medium"
                         android:textSize="16sp"
                         android:text="@string/mandible_width" />
-                    <Spinner
+                    <com.reolight.raceidentity.support.spinners.ColorSpinner
                         android:id="@+id/MandibleWidthSpinner"
                         android:layout_width="wrap_content"
                         android:layout_height="30sp"
                         android:layout_weight="0.5"
                         android:layout_margin="8dp"/>
                 </TableRow>
-                <TableRow>
+                <TableRow
+                    android:id="@+id/SkinColorRow">
                     <TextView
                         android:id="@+id/SkinColorText"
                         android:layout_width="wrap_content"
@@ -293,14 +300,15 @@
                         android:fontFamily="sans-serif-condensed-medium"
                         android:textSize="16sp"
                         android:text="@string/skin_color" />
-                    <Spinner
+                    <com.reolight.raceidentity.support.spinners.ColorSpinner
                         android:id="@+id/SkinColorSpinner"
                         android:layout_width="wrap_content"
                         android:layout_height="30sp"
                         android:layout_weight="0.5"
                         android:layout_margin="8dp"/>
                 </TableRow>
-                <TableRow>
+                <TableRow
+                    android:id="@+id/HairTypeRow">
                     <TextView
                         android:id="@+id/HairTypeText"
                         android:layout_width="wrap_content"
@@ -309,7 +317,7 @@
                         android:fontFamily="sans-serif-condensed-medium"
                         android:textSize="16sp"
                         android:text="@string/hair_type" />
-                    <Spinner
+                    <com.reolight.raceidentity.support.spinners.ColorSpinner
                         android:id="@+id/HairTypeSpinner"
                         android:layout_width="wrap_content"
                         android:layout_height="30sp"
@@ -324,7 +332,8 @@
                     android:adjustViewBounds="true"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/hair_color_palette" />
-                <TableRow>
+                <TableRow
+                    android:id="@+id/HairColorRow">
                     <TextView
                         android:id="@+id/HairColorText"
                         android:layout_width="wrap_content"
@@ -333,7 +342,7 @@
                         android:fontFamily="sans-serif-condensed-medium"
                         android:textSize="16sp"
                         android:text="@string/hair_color" />
-                    <Spinner
+                    <com.reolight.raceidentity.support.spinners.ColorSpinner
                         android:id="@+id/HairColorSpinner"
                         android:layout_width="wrap_content"
                         android:layout_height="30sp"
@@ -347,7 +356,8 @@
                     android:adjustViewBounds="true"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/martin_schultz_for_rostique" />
-                <TableRow>
+                <TableRow
+                    android:id="@+id/EyeColorRow">
                     <TextView
                         android:id="@+id/EyeColorText"
                         android:layout_width="wrap_content"
@@ -356,7 +366,7 @@
                         android:fontFamily="sans-serif-condensed-medium"
                         android:textSize="16sp"
                         android:text="@string/eye_color" />
-                    <Spinner
+                    <com.reolight.raceidentity.support.spinners.ColorSpinner
                         android:id="@+id/EyeColorSpinner"
                         android:layout_width="wrap_content"
                         android:layout_height="30sp"
