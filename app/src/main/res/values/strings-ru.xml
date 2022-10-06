@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="photo_text">Фото</string>
+    <string name="description_text">Раса — совокупность популяций человека с общими генетическими, фенотипическими и социальными признаками. Расы возникли как адаптация к условиям, в которых проживали люди в прошлом. Ныне же, в период глобализации и технологий, эти адаптивные признаки практически утратили свою адаптивную значимость. Однако изучение их истории появления может составлять интерес. Это приложение позволит вам определить субрасу.</string>
+    <string name="chart_text">Таблица</string>
+    <string name="fill_signs">Заполните параметры:</string>
+    <string name="nose">Нос</string>
+    <string name="width">Ширина</string>
+    <string name="height">Высота</string>
+    <string name="head">Голова</string>
+    <string name="length">Длина</string>
+    <string name="face_height1">Высота (Глабелла — подбородок)</string>
+    <string name="face_height2">Высота (линия роста волос — подбородок)</string>
+    <string name="face">Лицо</string>
+    <string name="nose_morph">Форма спинки носа</string>
+    <string name="forehead_height">Высота лба</string>
+    <string name="forehead_morph">Форма лба</string>
+    <string name="nape_convexity">Выпуклость затылка</string>
+    <string name="eye_cut_type">Разрез глазной щели</string>
+    <string name="cheekbone_width">Ширина скул</string>
+    <string name="mandible_width">Ширина челюсти</string>
+    <string name="skin_color">Цвет кожи</string>
+    <string name="hair_type">Тип волос</string>
+    <string name="hair_color">Цвет волос</string>
+    <string name="eye_color">Цвет глаз</string>
+
+    <string-array name="nose_back_form_array">
+        <item>Вогнутая</item>
+        <item>Прямая</item>
+        <item>Выпуклая</item>
+        <item>Волнистая</item>
+    </string-array>
+
+    <string-array name="forehead_height_array">
+        <item>Высокий</item>
+        <item>Средний</item>
+        <item>Низкий</item>
+    </string-array>
+
+    <string-array name="forehead_form_array">
+        <item>Вертикальный</item>
+        <item>Наклонный</item>
+        <item>Выпуклый</item>
+    </string-array>
+
+    <string-array name="nape_convexity_array">
+        <item>Плоский</item>
+        <item>Слабо выпуклый</item>
+        <item>Выпуклый</item>
+    </string-array>
+
+    <string-array name="eye_cut_type_array">
+        <item>Внутренние углы выше наружных</item>
+        <item>Горизонтальный</item>
+        <item>Наружные углы выше внутренних</item>
+    </string-array>
+
+    <string-array name="cheekbone_width_array">
+        <item>Узкие – линия близка к прямой</item>
+        <item>Средние – линия слегка изогнута</item>
+        <item>Широкие – линия значительно изогнута</item>
+    </string-array>
+
+    <string-array name="mandible_width_array">
+        <item>Узкая</item>
+        <item>Средняя</item>
+        <item>Широкая</item>
+    </string-array>
+
+    <string-array name="skin_color_array">
+        <item>Светлая</item>
+        <item>Светло-смуглая</item>
+        <item>Смуглая</item>
+    </string-array>
+
+    <string-array name="hair_type_array">
+        <item>Прямые</item>
+        <item>Волнистые</item>
+        <item>Вьющиеся</item>
+    </string-array>
+
+    <string name="scandidoNordid">Скандидо-нордид</string>
+    <string name="done_text">Готово</string>
+    <string name="east_nordidi">Восточный нордид</string>
+    <string name="celtic_nordid">Кельтский нордид</string>
+    <string name="sub_nordid">Суб-нордид</string>
+    <string name="falid">Фалид</string>
+    <string name="trender">Трёндер</string>
+    <string name="borrebi">Борреби</string>
+    <string name="bryunn">Брюнн</string>
+    <string name="western_baltid">Западный балтид</string>
+    <string name="baltid">Балтид</string>
+    <string name="eastern_baltid">Восточный балтид</string>
+    <string name="alpinid">Альпинид</string>
+    <string name="mountid">Горид</string>
+    <string name="mediterranid">Медитерранид</string>
+    <string name="atlantid">Атлантид</string>
+    <string name="northen_atlantid">Северный атлантид</string>
+    <string name="pontid">Понтид</string>
+    <string name="northen_pontid">Северный понтид</string>
+    <string name="dinarid">Динарид</string>
+    <string name="norik">Норик</string>
+    <string name="armenid">Арменид</string>
+    <string name="caspid">Каспид</string>
+    <string name="caucasid">Кавказид</string>
+    <string name="iranid">Иранид</string>
+    <string name="arabid">Арабид</string>
+    <string name="indid">Индид</string>
+    <string name="fill_all_fields_please">Заполните все поля!</string>
+</resources>

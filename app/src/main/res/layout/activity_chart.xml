@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ChartActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+            <TextView
+                android:id="@+id/fillParameters"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="sans-serif-condensed"
+                android:text="@string/fill_signs"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/NoseSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:text="@string/nose"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+            <EditText
+                android:id="@+id/NoseWidthVal"
+                android:layout_height="48dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="0.5"
+                android:autofillHints="Введите ширину носа"
+                android:ems="10"
+                android:hint="@string/width"
+                android:inputType="numberDecimal"
+                android:textColorHint="#757575"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView6"
+                android:layout_width="wrap_content" />
+
+            <EditText
+                android:id="@+id/NoseHeightVal"
+                android:layout_weight="0.5"
+                android:layout_marginEnd="16dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="2dp"
+                android:autofillHints="Измерьте высоту носа"
+                android:ems="10"
+                android:layout_width="wrap_content"
+                android:hint="@string/height"
+                android:inputType="numberDecimal"
+                android:textColorHint="#757575"
+                app:layout_constraintStart_toEndOf="@+id/NoseWidthVal"
+                app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+            <TextView
+                android:id="@+id/HeadSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:text="@string/head"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/NoseParameters" />
+
+            <EditText
+                android:id="@+id/SkullWidthVal"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="0.5"
+                android:autofillHints="Измерьте максимальную ширину черепа"
+                android:ems="10"
+                android:hint="@string/width"
+                android:inputType="numberDecimal"
+                android:textColorHint="#757575"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/HeadSize" />
+
+            <EditText
+                android:id="@+id/SkullHeightVal"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="0.5"
+                android:autofillHints="Измерьте длину черепа"
+                android:ems="10"
+                android:hint="@string/height"
+                android:inputType="numberDecimal"
+                android:textColorHint="#757575"
+                app:layout_constraintStart_toEndOf="@+id/SkullWidthVal"
+                app:layout_constraintTop_toBottomOf="@+id/HeadSize" />
+
+            <TextView
+                android:id="@+id/FaceSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:text="@string/face"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/HeadParameters" />
+
+            <EditText
+                android:id="@+id/FaceHeight1Val"
+                android:layout_height="48dp"
+                android:layout_width="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="16dp"
+                android:autofillHints="Измерьте максимальную высоту лица"
+                android:ems="10"
+                android:hint="@string/face_height1"
+                android:inputType="numberDecimal"
+                android:textColorHint="#757575"
+                app:layout_constraintStart_toStartOf="parent" />
+            <EditText
+                android:id="@+id/FaceHeight2Val"
+                android:layout_height="48dp"
+                android:layout_width="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="16dp"
+                android:autofillHints="Измерьте максимальную высоту лица"
+                android:ems="10"
+                android:hint="@string/face_height2"
+                android:inputType="numberDecimal"
+                android:textColorHint="#757575"
+                app:layout_constraintStart_toStartOf="parent" />
+            <EditText
+                android:id="@+id/ForeheadHeightVal"
+                android:layout_height="48dp"
+                android:layout_width="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="0.5"
+                android:autofillHints="Измерьте длину лица"
+                android:ems="10"
+                android:hint="@string/forehead_height"
+                android:inputType="numberDecimal"
+                android:textColorHint="#757575"
+                app:layout_constraintStart_toEndOf="@+id/FaceHeight" />
+            <EditText
+                android:id="@+id/FaceWidthVal"
+                android:layout_height="48dp"
+                android:layout_width="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="0.5"
+                android:autofillHints="Измерьте длину лица"
+                android:ems="10"
+                android:hint="@string/width"
+                android:inputType="numberDecimal"
+                android:textColorHint="#757575"
+                app:layout_constraintStart_toEndOf="@+id/FaceHeight" />
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TableRow>
+                    <TextView
+                        android:id="@+id/NoseMorphText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30sp"
+                        android:layout_margin="8dp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:textSize="16sp"
+                        android:text="@string/nose_morph" />
+                    <Spinner
+                        android:id="@+id/NoseMorphSpinner"
+                        android:layout_weight="0.5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30sp"
+                        android:layout_margin="8dp" />
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:id="@+id/ForeheadMorphText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30sp"
+                        android:layout_margin="8dp"
+                        android:textSize="16sp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:text="@string/forehead_morph"
+                        />
+                    <Spinner
+                        android:id="@+id/ForeheadMorphSpinner"
+                        android:layout_weight="0.5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30sp"
+                        android:layout_margin="8dp"/>
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:id="@+id/NapeConvexityText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30sp"
+                        android:layout_margin="8dp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:textSize="16sp"
+                        android:text="@string/nape_convexity"
+                        />
+                    <Spinner
+                        android:id="@+id/NapeConvexitySpinner"
+                        android:layout_weight="0.5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30sp"
+                        android:layout_margin="8dp" />
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:id="@+id/EyeCutTypeText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30sp"
+                        android:layout_margin="8dp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:textSize="16sp"
+                        android:text="@string/eye_cut_type" />
+                    <Spinner
+                        android:id="@+id/EyeCutTypeSpinner"
+                        android:layout_weight="0.5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30sp"
+                        android:layout_margin="8dp" />
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:id="@+id/CheekboneWidthText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30sp"
+                        android:layout_margin="8dp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:textSize="16sp"
+                        android:text="@string/cheekbone_width" />
+                    <Spinner
+                        android:id="@+id/CheekboneWidthSpinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30sp"
+                        android:layout_weight="0.5"
+                        android:layout_margin="8dp" />
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:id="@+id/MandibleWidthText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30sp"
+                        android:layout_margin="8dp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:textSize="16sp"
+                        android:text="@string/mandible_width" />
+                    <Spinner
+                        android:id="@+id/MandibleWidthSpinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30sp"
+                        android:layout_weight="0.5"
+                        android:layout_margin="8dp"/>
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:id="@+id/SkinColorText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30sp"
+                        android:layout_margin="8dp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:textSize="16sp"
+                        android:text="@string/skin_color" />
+                    <Spinner
+                        android:id="@+id/SkinColorSpinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30sp"
+                        android:layout_weight="0.5"
+                        android:layout_margin="8dp"/>
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:id="@+id/HairTypeText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30sp"
+                        android:layout_margin="8dp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:textSize="16sp"
+                        android:text="@string/hair_type" />
+                    <Spinner
+                        android:id="@+id/HairTypeSpinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30sp"
+                        android:layout_weight="0.5"
+                        android:layout_margin="8dp"/>
+                </TableRow>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/hair_color_palette" />
+                <TableRow>
+                    <TextView
+                        android:id="@+id/HairColorText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30sp"
+                        android:layout_margin="8dp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:textSize="16sp"
+                        android:text="@string/hair_color" />
+                    <Spinner
+                        android:id="@+id/HairColorSpinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30sp"
+                        android:layout_weight="0.5"
+                        android:layout_margin="8dp"/>
+                </TableRow>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/martin_schultz_for_rostique" />
+                <TableRow>
+                    <TextView
+                        android:id="@+id/EyeColorText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30sp"
+                        android:layout_margin="8dp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:textSize="16sp"
+                        android:text="@string/eye_color" />
+                    <Spinner
+                        android:id="@+id/EyeColorSpinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30sp"
+                        android:layout_weight="0.5"
+                        android:layout_margin="8dp"/>
+                </TableRow>
+            </TableLayout>
+
+            <Button
+                android:id="@+id/ChartDoneButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/done_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
