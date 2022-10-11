@@ -4,25 +4,74 @@
     <string name="description_text">Раса — совокупность популяций человека с общими генетическими, фенотипическими и социальными признаками. Расы возникли как адаптация к условиям, в которых проживали люди в прошлом. Ныне же, в период глобализации и технологий, эти адаптивные признаки практически утратили свою адаптивную значимость. Однако изучение их истории появления может составлять интерес. Это приложение позволит вам определить субрасу.</string>
     <string name="chart_text">Таблица</string>
     <string name="fill_signs">Заполните параметры:</string>
-    <string name="nose">Нос</string>
+
+    <string name="string_valied_percent">%1$s (%2$d%)</string>
+    <string name="nose">Нос:</string>
+    <string name="nose_index">Носовой индекс</string>
+    <string name="nose_index_valued">Носовой индекс: %1$s</string>
+    <string-array name="nose_index_values">
+        <item name="nose_index_leptorhinia">Лепториния</item>
+        <item name="nose_index_mesorhinia">Мезориния</item>
+        <item name="nose_index_hamerhinia">Хамэриния</item>
+    </string-array>
+
     <string name="width">Ширина</string>
     <string name="height">Высота</string>
+
     <string name="head">Голова</string>
+    <string name="kephal_index">Цефальный индекс</string>
+    <string name="kephal_index_valued">Цефальный индекс: %1$s</string>
+    <string-array name="kephal_index_values">
+        <item name="kephal_index_dolyhokephal">Долихоцефалия</item>
+        <item name="kephal_index_mesokephal">Мезоцефалия</item>
+        <item name="kephal_index_brachikephal">Брахицефалия</item>
+    </string-array>
+
     <string name="length">Длина</string>
     <string name="face_height1">Высота (Глабелла — подбородок)</string>
     <string name="face_height2">Высота (линия роста волос — подбородок)</string>
+
     <string name="face">Лицо</string>
+    <string name="facial_index">Лицевой индекс</string>
+    <string name="facial_index_valued">Лицевой индекс: %1$s</string>
+    <string-array name="facial_index_values">
+        <item name="facial_index_yuriprosopia">Юрипросопия</item>
+        <item name="facial_index_mesoprosopia">Мезопросопия</item>
+        <item name="facial_index_leptoprosopia">Лептопросопия</item>
+    </string-array>
+
     <string name="nose_morph">Форма спинки носа</string>
+    <string name="nose_morph_valued">Форма спинки носа: %1$s</string>
+
     <string name="forehead_height">Высота лба</string>
+    <string name="forehead_height_valued">Высота лба: %1$s</string>
+
     <string name="forehead_morph">Форма лба</string>
+    <string name="forehead_morph_valued">Форма лба: %1$s</string>
+
     <string name="nape_convexity">Выпуклость затылка</string>
+    <string name="nape_convexity_valued">Выпуклость затылка: %1$s</string>
+
     <string name="eye_cut_type">Разрез глазной щели</string>
+    <string name="eye_cut_type_valued">Разрез глазной щели: %1$s</string>
+
     <string name="cheekbone_width">Ширина скул</string>
+    <string name="cheekbone_width_valued">Ширина скул: %1$s</string>
+
     <string name="mandible_width">Ширина челюсти</string>
+    <string name="mandible_width_valued">Ширина челюсти: %1$s</string>
+
     <string name="skin_color">Цвет кожи</string>
+    <string name="skin_color_valued">Цвет кожи: %1$s</string>
+
     <string name="hair_type">Тип волос</string>
+    <string name="hair_type_valued">Тип волос: %1$s</string>
+
     <string name="hair_color">Цвет волос</string>
+    <string name="hair_color_valued">Цвет волос: %1$s</string>
+
     <string name="eye_color">Цвет глаз</string>
+    <string name="eye_color_valued">Цвет глаз: %1$s</string>
 
     <string-array name="nose_back_form_array">
         <item>Вогнутая</item>
@@ -107,4 +156,9 @@
     <string name="arabid">Арабид</string>
     <string name="indid">Индид</string>
     <string name="fill_all_fields_please">Заполните все поля!</string>
+
+    <string name="take_photo">Сфотографировать</string>
+    <string name="start_capture">Начать захват</string>
+    <string name="stop_capture">Остановить захват</string>
+
 </resources>

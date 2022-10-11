@@ -14,3 +14,5 @@
 .externalNativeBuild
 .cxx
 local.properties
+/app/src/androidTest/java/com/reolight/raceidentity/
+/app/src/test/java/com/reolight/raceidentity/

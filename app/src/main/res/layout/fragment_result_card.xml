@@ -8,6 +8,7 @@
 
     <!-- TODO: Update blank fragment layout -->
     <androidx.cardview.widget.CardView
+        android:id="@+id/ResultCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="16dp"
@@ -35,6 +36,155 @@
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 android:scaleY="5.0" />
+
+            <LinearLayout
+                android:id="@+id/AdditionalInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="#dfdfdf"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/KephalIndexInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginVertical="4dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:text="@string/kephal_index_valued"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/NoseIndexInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginVertical="4dp"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:text="@string/nose_index_valued"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/FacialIndexInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginVertical="4dp"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:text="@string/facial_index_valued"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/NoseMorphInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginVertical="4dp"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:text="@string/nose_morph_valued"
+                    android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/ForeheadHeightIndexInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginVertical="4dp"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:text="@string/forehead_height_valued"
+                    android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/ForeheadMorphInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginVertical="4dp"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:text="@string/forehead_morph_valued"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/NapeConvInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginVertical="4dp"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:text="@string/nape_convexity_valued"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/EyeShapeInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginVertical="4dp"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:text="@string/eye_cut_type_valued"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/EyeColorInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginVertical="4dp"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:text="@string/eye_color_valued"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/CheekboneWidthInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginVertical="4dp"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:text="@string/cheekbone_width_valued"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/MandibleWidthInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginVertical="4dp"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:text="@string/mandible_width_valued"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/SkinColorInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginVertical="4dp"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:text="@string/skin_color_valued"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/HairTypeInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginVertical="4dp"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:text="@string/hair_type_valued"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/HairColorInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginVertical="4dp"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:text="@string/hair_color_valued"
+                    android:textSize="16sp" />
+            </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

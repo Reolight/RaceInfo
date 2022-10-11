@@ -5,13 +5,13 @@ import android.util.Range
 import com.reolight.raceidentity.support.enums.HairColor
 
 class Charter {
-    var kefalIndex: Float? = null
+    var kefalIndex: Int? = null
         private var _skullWidth: Float? = null
         private var _skullHeight: Float? = null
-    var faceIndex: Float? = null
+    var faceIndex: Int? = null
         private var _faceHeight1: Float? = null
         private var _faceWidth: Float? = null
-    var noseIndex: Float? = null
+    var noseIndex: Int? = null
         private var _noseLength: Float? = null
         private var _noseWidth: Float? = null
     var noseMorph: Int? = null
@@ -33,33 +33,35 @@ class Charter {
     }
 
     private fun calcIndexes(){
-        kefalIndex = _skullWidth!! / _skullHeight!!
-        faceIndex =  _faceWidth!! / _faceHeight1!!
-        noseIndex =  _noseWidth!! / _noseLength!!
-        val lower = _faceHeight2!! / 3 * 0.95
-        val upper = _faceHeight2!! / 3 * 0.105
-        val kore = _foreheadHeight!! / (_faceHeight2!! / 3)
-        foreheadHeightIndex = when {
-            kore < lower -> 0
-            kore in lower..upper -> 1
-            kore > upper -> 2
-            else -> -1
+        fun calc(index1: Float, index2: Float, threshold1: Float, threshold2: Float): Int {
+            val i = index1 / index2
+            return when {
+                i < threshold1 -> 0
+                i in threshold1..threshold2 -> 1
+                i > threshold2 -> 2
+                else -> -1
+            }
         }
+        kefalIndex = calc(_skullWidth!!, _skullHeight!!, 0.77f, 0.81f)
+        faceIndex =  calc(_faceWidth!!, _faceHeight1!!, 0.84f, 0.88f)
+        noseIndex =  calc(_noseWidth!!, _noseLength!!, 0.7f, 0.85f)
+        foreheadHeightIndex = calc(_foreheadHeight!!, _faceHeight2!! / 3,
+            _faceHeight2!! / 3 * 0.95f, _faceHeight2!! / 3 * 0.105f)
     }
 
     fun updateVals(skullW: Float, skullH: Float,
                    faceH1: Float, faceW: Float,
                    noseL: Float, noseW: Float,
                    foreH: Float, faceH2: Float){
-        _skullWidth = skullW;    _skullHeight = skullH;
-        _faceHeight1 = faceH1;   _faceWidth = faceW;
-        _noseLength = noseL;     _noseWidth = noseW;
-        _foreheadHeight = foreH; _faceHeight2 = faceH2;
+        _skullWidth = skullW;    _skullHeight = skullH
+        _faceHeight1 = faceH1;   _faceWidth = faceW
+        _noseLength = noseL;     _noseWidth = noseW
+        _foreheadHeight = foreH; _faceHeight2 = faceH2
         calcIndexes()
     }
 
     fun calculate(context: Context){
-        var subracesInfo = Subraces.GetInstance(context)
+        val subracesInfo = Subraces.GetInstance(context)
         subracesInfo.subraces.forEach {
             it.ScoreSimilarity(this)
         }

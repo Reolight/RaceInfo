@@ -5,9 +5,9 @@ import com.reolight.raceidentity.support.enums.HairColor
 
 data class Subrace(
     val Name: String,
-    var KefalIndex: Range<Float>,
-    var FaceIndex: Range<Float>,
-    var NoseIndex: Range<Float>,
+    var KefalIndex: Int,
+    var FaceIndex: Int,
+    var NoseIndex: List<Int>,
 
     var NoseMorph: List<Int>,
     var ForeheadHeightIndex: List<Int>,
@@ -21,27 +21,55 @@ data class Subrace(
     var HairColors: List<Range<Int>>,
     var HairType: List<Int>
 ) {
-    var Score = 0 //max 13!
+    companion object Constants{
+        val SCORE_MAX = 14
+        val KEF = "kef"
+        val FAC = "fac"
+        val NOS = "nos"
+        val NSM = "nsm"
+        val FHI = "fhi"
+        val FHM = "fhm"
+        val NCV = "ncv"
+        val EYS = "eys"
+        val EYC = "eyc"
+        val CBW = "cbw"
+        val MDW = "mdw"
+        val SKC = "skc"
+        val HRC = "hrc"
+        val HRT = "hrt"
+    }
 
-    public fun ScoreSimilarity(other: Charter) {
-        Score = 0
-        if (KefalIndex.contains(other.kefalIndex)) Score++
-        if (FaceIndex.contains(other.faceIndex)) Score++
-        if (NoseIndex.contains(other.noseIndex)) Score++
+    var Score = 0 //max 14!
+    var Matched = ""
 
-        if (NoseMorph.contains(other.noseMorph)) Score++
-        if (ForeheadHeightIndex.contains(other.foreheadHeightIndex)) Score++
-        if (ForeheadMorph.contains(other.foreheadMorph)) Score++
-        if (NapeConvexity.contains(other.napeConvexity)) Score++
-        if (EyeShape.contains(other.eyeShape)) Score++
-        if (CheekboneWidth.contains(other.cheekboneWidth)) Score++
-        if (MandibleWidth.contains(other.mandibleWidth)) Score++
-        if (SkinColor.contains(other.skinColor)) Score++
+    fun ScoreSimilarity(other: Charter) {
+        Score = 0; Matched = ""
+        val coincident = mutableListOf<String>()
 
-        HairColors.forEach {
-            if (it.contains(other.hairColor)) Score++
+        fun Yes(string: String){
+            Score++
+            coincident.add(string)
         }
 
-        if (EyeColors.contains(other.eyeColor)) Score++
+        if (KefalIndex.toString().indexOf(other.kefalIndex.toString()) >= 0) Yes(KEF)
+        if (FaceIndex.toString().indexOf(other.faceIndex.toString()) >= 0) Yes(FAC)
+        if (NoseIndex.toString().indexOf(other.noseIndex.toString()) >= 0) Yes(NOS)
+
+        if (NoseMorph.contains(other.noseMorph)) Yes(NSM)
+        if (ForeheadHeightIndex.contains(other.foreheadHeightIndex)) Yes(FHI)
+        if (ForeheadMorph.contains(other.foreheadMorph)) Yes(FHM)
+        if (NapeConvexity.contains(other.napeConvexity)) Yes(NCV)
+        if (EyeShape.contains(other.eyeShape)) Yes(EYS)
+        if (CheekboneWidth.contains(other.cheekboneWidth)) Yes(CBW)
+        if (MandibleWidth.contains(other.mandibleWidth)) Yes(MDW)
+        if (SkinColor.contains(other.skinColor)) Yes(SKC)
+        if (HairType.contains(other.hairType)) Yes(HRT)
+
+        HairColors.forEach {
+            if (it.contains(other.hairColor)) Yes(HRC)
+        }
+
+        if (EyeColors.contains(other.eyeColor)) Yes(EYC)
+        Matched = coincident.joinToString("|")
     }
 }

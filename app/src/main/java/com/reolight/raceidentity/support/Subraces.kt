@@ -1,9 +1,9 @@
 package com.reolight.raceidentity.support
 
 import android.content.Context
+import android.util.Range
 import com.reolight.raceidentity.R
 import com.reolight.raceidentity.support.enums.HairColor
-import android.util.Range
 
 //NB: ВСE ПЕРЕЧИСЛЕНИЯ НАЧИНАЮТСЯ С 0!!1
 //Перечисления -- это низкий, средний, высокий. Узкий, широкий и проч. ГЛАЗА ТОЧНО ТАК ЖЕ! (БЫЛО 1 - 8, СТАЛО 0 - 7!!!)
@@ -11,8 +11,10 @@ import android.util.Range
 //Низкий - 0, средний - 1, высокий - 2
 //РАЗРЕЗ = ФОРМА ГЛАЗ!!! (EYE SHAPE НА АНГЛЕ)
 
-class Subraces(val context: Context) {
+class Subraces(context: Context) {
+
     companion object Factory {
+
         private var instance: Subraces? = null
         fun GetInstance(context: Context?) : Subraces{
             if (instance == null){
@@ -21,90 +23,496 @@ class Subraces(val context: Context) {
 
             return instance!!
         }
+
+        fun GetSubrace(name: String): Subrace? {
+            instance?.let {
+                return it.subraces.find { it.Name == name }
+            }
+
+            return null
+        }
     }
 
+    var subraces: List<Subrace> = listOf()
+    init {
+        subraces = listOf(
+            //ЗАПОЛНЯТЬ СЮДА
+            //ШАБЛОН: ИМЯ, ЦЕФ ИНД, ЛИЦ И, НОС И, ФОРМА НОСА, ВЫСОТА ЛБА, ФОРМА ЛБА, ВЫПУКЛОСТЬ ЗАТЫЛКА, ФОРМА ГЛАЗ, ШИРИНА СКУЛ, Ш ЧЕЛЮСТИ, ЦВЕТ КОЖИ, Ц ГЛАЗ, Ц ВОЛОС, ФОРМА ВОЛОС
+            Subrace(
+                context.getString(R.string.scandidoNordid),
+                0,
+                2,
+                listOf(0),
+                listOf(1),
+                listOf(1, 2),
+                listOf(1),
+                listOf(2),
+                listOf(1),
+                listOf(0),
+                listOf(1, 2),
+                listOf(0),
+                (0..7).toList(),
+                listOf(Range(HairColor.A.ordinal, HairColor.M.ordinal)),
+                listOf(1)
+            ),
 
-    var subraces: List<Subrace> = listOf(
-        //ЗАПОЛНЯТЬ СЮДА
-        //ШАБЛОН: ИМЯ, ЦЕФ ИНД, ЛИЦ И, НОС И, ФОРМА НОСА, ВЫСОТА ЛБА, ФОРМА ЛБА, ВЫПУКЛОСТЬ ЗАТЫЛКА, ФОРМА ГЛАЗ, ШИРИНА СКУЛ, Ш ЧЕЛЮСТИ, ЦВЕТ КОЖИ, Ц ГЛАЗ, Ц ВОЛОС, ФОРМА ВОЛОС
-        Subrace(context.getString(R.string.scandidoNordid), Range(0f, 0.769f), Range(0.88f, 100f), Range( 0f, 0.70f),
-            listOf(1), listOf(1,2), listOf(1), listOf(2), listOf(1), listOf(0), listOf(1,2), listOf(0), (0..7).toList(), listOf(Range(HairColor.A.ordinal, HairColor.M.ordinal)), listOf(1)),
+            Subrace(
+                context.getString(R.string.east_nordidi),
+                0,
+                2,
+                listOf(0),
+                listOf(1, 2),
+                listOf(2),
+                listOf(1),
+                listOf(2),
+                listOf(1),
+                listOf(0),
+                listOf(0),
+                listOf(0),
+                (0..7).toList(),
+                listOf(Range(HairColor.A.ordinal, HairColor.M.ordinal)),
+                listOf(0, 1)
+            ),
 
-        Subrace(context.getString(R.string.east_nordidi), Range(0f, 0.769f), Range(0.88f, 100f), Range(0f, 0.77f),
-        listOf(1,2), listOf(2), listOf(1), listOf(2), listOf(1), listOf(0), listOf(0), listOf(0), (0..7).toList(), listOf(Range(HairColor.A.ordinal, HairColor.M.ordinal)), listOf(0,1)),
+            Subrace(
+                context.getString(R.string.celtic_nordid),
+                1,
+                2,
+                listOf(0),
+                listOf(1, 2),
+                listOf(2),
+                listOf(1),
+                listOf(2),
+                listOf(1),
+                listOf(0),
+                listOf(0),
+                listOf(0),
+                (8..10).toList(),
+                listOf(Range(HairColor.A.ordinal, HairColor.W.ordinal)),
+                listOf(0)
+            ),
 
-        Subrace(context.getString(R.string.celtic_nordid), Range(0.77f, 0.809f), Range(0.88f, 100f), Range(0f, 0.699f),
-        listOf(1,2), listOf(2), listOf(1), listOf(2), listOf(1), listOf(0), listOf(0), listOf(0), (8..10).toList(), listOf(Range(HairColor.A.ordinal, HairColor.W.ordinal)), listOf(0)),
+            Subrace(
+                context.getString(R.string.sub_nordid),
+                0,
+                2,
+                listOf(0),
+                listOf(1),
+                listOf(1, 2),
+                listOf(1),
+                listOf(1),
+                listOf(1),
+                listOf(1),
+                listOf(1),
+                listOf(0),
+                (0..10).toList(),
+                listOf(Range(HairColor.H.ordinal, HairColor.W.ordinal)),
+                listOf(0)
+            ),
 
-        Subrace(context.getString(R.string.trender), Range(0f, 0.769f), Range(0.88f, 100f), Range(0f, 0.699f),
-        listOf(1,2), listOf(2), listOf(1), listOf(2), listOf(1), listOf(1), listOf(1), listOf(0), (0..4).toList(), listOf(Range(HairColor.E.ordinal, HairColor.W.ordinal)), listOf(0,1)),
+            Subrace(
+                context.getString(R.string.trender),
+                1,
+                1,
+                listOf(1),
+                listOf(1, 2),
+                listOf(2),
+                listOf(1),
+                listOf(2),
+                listOf(1),
+                listOf(1),
+                listOf(1),
+                listOf(0),
+                (0..4).toList(),
+                listOf(Range(HairColor.E.ordinal, HairColor.W.ordinal)),
+                listOf(0, 1)
+            ),
 
-        Subrace(context.getString(R.string.sub_nordid), Range(0.77f, 0.809f), Range(0.84f, 0.879f), Range(0.7f, 0.849f),
-        listOf(1), listOf(1,2), listOf(1), listOf(1), listOf(1), listOf(1), listOf(1), listOf(0), (0..10).toList(), listOf(Range(HairColor.H.ordinal, HairColor.W.ordinal)), listOf(0)),
+            Subrace(
+                context.getString(R.string.falid),
+                1,
+                0,
+                listOf(2),
+                listOf(0, 1),
+                listOf(1),
+                listOf(1),
+                listOf(1),
+                listOf(1),
+                listOf(2),
+                listOf(2),
+                listOf(0),
+                (0..7).toList(),
+                listOf(Range(HairColor.A.ordinal, HairColor.M.ordinal)),
+                listOf(0)
+            ),
 
-        Subrace(context.getString(R.string.falid), Range(0.77f, 0.809f), Range(0f, 0.8399f), Range(0.85f, 100f),
-        listOf(0,1), listOf(1), listOf(1), listOf(1), listOf(1), listOf(2), listOf(2), listOf(0), (0..7).toList(), listOf(Range(HairColor.A.ordinal, HairColor.M.ordinal)), listOf(0)),
+            Subrace(
+                context.getString(R.string.borrebi),
+                2,
+                0,
+                listOf(2),
+                listOf(0, 1),
+                listOf(2),
+                listOf(0),
+                listOf(1),
+                listOf(1),
+                listOf(2),
+                listOf(2),
+                listOf(0),
+                (0..5).toList(),
+                listOf(Range(HairColor.A.ordinal, HairColor.G.ordinal)),
+                listOf(0)
+            ),
 
-        Subrace(context.getString(R.string.borrebi), Range(0.81f, 100f), Range(0f, 0.8399f), Range(0.85f, 100f),
-        listOf(0,1), listOf(2), listOf(0), listOf(1), listOf(1), listOf(2), listOf(2), listOf(0), (0..5).toList(), listOf(Range(HairColor.A.ordinal, HairColor.G.ordinal)), listOf(0)),
+            Subrace(
+                context.getString(R.string.bryunn),
+                2,
+                0,
+                listOf(2),
+                listOf(0, 1),
+                listOf(2),
+                listOf(2),
+                listOf(1),
+                listOf(1),
+                listOf(2),
+                listOf(2),
+                listOf(0),
+                (0..4).toList(),
+                listOf(
+                    Range(HairColor.C.ordinal, HairColor.S.ordinal),
+                    Range(HairColor.i.ordinal, HairColor.vi.ordinal)
+                ),
+                listOf(0, 1)
+            ),
 
-        Subrace(context.getString(R.string.bryunn), Range(0.81f, 100f), Range(0f, 0.8399f), Range(0.85f, 100f),
-        listOf(0,1), listOf(2), listOf(2), listOf(1), listOf(1), listOf(2), listOf(2), listOf(0), (0..4).toList(), listOf(Range(HairColor.C.ordinal, HairColor.S.ordinal), Range(HairColor.i.ordinal, HairColor.vi.ordinal)), listOf(0,1)),
+            Subrace(
+                context.getString(R.string.western_baltid),
+                2,
+                0,
+                listOf(1),
+                listOf(1),
+                listOf(2),
+                listOf(0),
+                listOf(1),
+                listOf(1),
+                listOf(1, 2),
+                listOf(2),
+                listOf(0),
+                (0..7).toList(),
+                listOf(Range(HairColor.A.ordinal, HairColor.W.ordinal)),
+                listOf(0)
+            ),
 
-        Subrace(context.getString(R.string.western_baltid), Range(0.81f, 100f), Range(0f, 0.8399f), Range(0.7f, 0.849f),
-        listOf(1), listOf(2), listOf(0), listOf(1), listOf(1), listOf(1,2), listOf(2), listOf(0), (0..7).toList(), listOf(Range(HairColor.A.ordinal, HairColor.W.ordinal)), listOf(0)),
+            Subrace(
+                context.getString(R.string.baltid),
+                2,
+                0,
+                listOf(1),
+                listOf(0, 1, 3),
+                listOf(2),
+                listOf(0, 2),
+                listOf(1),
+                listOf(1),
+                listOf(1),
+                listOf(1, 2),
+                listOf(0),
+                (0..7).toList(),
+                listOf(Range(HairColor.A.ordinal, HairColor.W.ordinal)),
+                listOf(0)
+            ),
 
-        Subrace(context.getString(R.string.baltid), Range(0.81f, 100f), Range(0f, 0.8399f), Range(0.7f, 0.849f),
-        listOf(0,1,3), listOf(2), listOf(0,2), listOf(1), listOf(1), listOf(1), listOf(1,2), listOf(0), (0..7).toList(), listOf(Range(HairColor.A.ordinal, HairColor.W.ordinal)), listOf(0)),
+            Subrace(
+                context.getString(R.string.eastern_baltid),
+                2,
+                0,
+                listOf(1, 2),
+                listOf(0),
+                listOf(1),
+                listOf(0, 2),
+                listOf(0),
+                listOf(1, 2),
+                listOf(2),
+                listOf(2),
+                listOf(0),
+                (0..7).toList(),
+                listOf(Range(HairColor.A.ordinal, HairColor.M.ordinal)),
+                listOf(0)
+            ),
 
-        Subrace(context.getString(R.string.eastern_baltid), Range(0.81f, 100f), Range(0f, 0.8399f), Range(0.7f, 100f),
-        listOf(0), listOf(1), listOf(0,2), listOf(0), listOf(1,2), listOf(2), listOf(2), listOf(0), (0..7).toList(), listOf(Range(HairColor.A.ordinal, HairColor.M.ordinal)), listOf(0)),
+            Subrace(
+                context.getString(R.string.alpinid),
+                2,
+                0,
+                listOf(1),
+                listOf(0, 1),
+                listOf(1, 2),
+                listOf(0, 1),
+                listOf(0),
+                listOf(1, 2),
+                listOf(1, 2),
+                listOf(2),
+                listOf(1),
+                (15..17).toList(),
+                listOf(Range(HairColor.O.ordinal, HairColor.S.ordinal)),
+                listOf(0)
+            ),
 
-        Subrace(context.getString(R.string.alpinid), Range(0.81f, 100f), Range(0f, 0.8399f), Range(0.7f, 0.849f),
-        listOf(0,1), listOf(1,2), listOf(0,1), listOf(0), listOf(1,2), listOf(1,2), listOf(2), listOf(1), (15..17).toList(), listOf(Range(HairColor.O.ordinal, HairColor.S.ordinal)), listOf(0)),
+            Subrace(
+                context.getString(R.string.mountid),
+                2,
+                0,
+                listOf(1),
+                listOf(0, 1),
+                listOf(1, 2),
+                listOf(1),
+                listOf(1),
+                listOf(1),
+                listOf(1, 2),
+                listOf(1),
+                listOf(0, 1, 2),
+                (8..11).toList() + (15..17).toList(),
+                listOf(Range(HairColor.H.ordinal, HairColor.S.ordinal)),
+                listOf(0, 1)
+            ),
 
-        Subrace(context.getString(R.string.mountid), Range(0.81f, 100f), Range(0f, 0.8399f), Range(0.7f, 0.849f),
-        listOf(0,1), listOf(1,2), listOf(1), listOf(1), listOf(1), listOf(1,2), listOf(1), listOf(0,1,2), (8..11).toList() + (15..17).toList(), listOf(Range(HairColor.H.ordinal, HairColor.S.ordinal)), listOf(0,1)),
+            Subrace(
+                context.getString(R.string.mediterranid),
+                0,
+                0,
+                listOf(0),
+                listOf(1),
+                listOf(1),
+                listOf(1),
+                listOf(2),
+                listOf(1),
+                listOf(0),
+                listOf(0),
+                listOf(2),
+                (15..17).toList(),
+                listOf(Range(HairColor.O.ordinal, HairColor.Y.ordinal)),
+                listOf(2)
+            ),
 
-        Subrace(context.getString(R.string.mediterranid), Range(0f, 0.769f), Range(0.88f, 100f), Range(0f, 0.699f),
-        listOf(1), listOf(1), listOf(1), listOf(2), listOf(1), listOf(0), listOf(0), listOf(2), (15..17).toList(), listOf(Range(HairColor.O.ordinal, HairColor.Y.ordinal)), listOf(2)),
+            Subrace(
+                context.getString(R.string.atlantid),
+                0,
+                2,
+                listOf(0),
+                listOf(1),
+                listOf(1, 2),
+                listOf(0, 1),
+                listOf(2),
+                listOf(1),
+                listOf(0),
+                listOf(0),
+                listOf(0, 1, 2),
+                (8..10).toList(),
+                listOf(Range(HairColor.M.ordinal, HairColor.W.ordinal)),
+                listOf(0)
+            ),
 
-        Subrace(context.getString(R.string.atlantid), Range(0f, 0.769f), Range(0.88f, 100f), Range(0f, 0.699f),
-        listOf(1), listOf(1,2), listOf(0,1), listOf(2), listOf(1), listOf(0), listOf(0), listOf(0,1,2), (8..10).toList(), listOf(Range(HairColor.M.ordinal, HairColor.W.ordinal)), listOf(0)),
+            Subrace(
+                context.getString(R.string.northen_atlantid),
+                0,
+                2,
+                listOf(0),
+                listOf(1),
+                listOf(1),
+                listOf(1),
+                listOf(2),
+                listOf(1),
+                listOf(0),
+                listOf(0),
+                listOf(0),
+                (0..4).toList() + (8..10).toList(),
+                listOf(Range(HairColor.T.ordinal, HairColor.W.ordinal)),
+                listOf(0, 1, 2)
+            ),
 
-        Subrace(context.getString(R.string.northen_atlantid), Range(0f, 0.769f), Range(0.88f, 100f), Range(0f, 0.699f),
-        listOf(1), listOf(1), listOf(1), listOf(2), listOf(1), listOf(0), listOf(0), listOf(0), (0..4).toList() + (8..10).toList(), listOf(Range(HairColor.T.ordinal, HairColor.W.ordinal)), listOf(0,1,2)),
+            Subrace(
+                context.getString(R.string.pontid),
+                0,
+                2,
+                listOf(0),
+                listOf(1, 3),
+                listOf(1, 2),
+                listOf(1),
+                listOf(2),
+                listOf(1),
+                listOf(0),
+                listOf(0),
+                listOf(1),
+                (15..17).toList(),
+                listOf(Range(HairColor.M.ordinal, HairColor.W.ordinal)),
+                listOf(0)
+            ),
 
-        Subrace(context.getString(R.string.pontid), Range(0f, 0.769f), Range(0.88f, 100f), Range(0f, 0.699f),
-        listOf(1,3), listOf(1,2), listOf(1), listOf(2), listOf(1), listOf(0), listOf(0), listOf(1), (15..17).toList(), listOf(Range(HairColor.M.ordinal, HairColor.W.ordinal)), listOf(0)),
+            Subrace(
+                context.getString(R.string.northen_pontid),
+                1,
+                2,
+                listOf(0),
+                listOf(1, 3),
+                listOf(1, 2),
+                listOf(1),
+                listOf(1),
+                listOf(1),
+                listOf(1),
+                listOf(0),
+                listOf(0),
+                (0..10).toList(),
+                listOf(Range(HairColor.H.ordinal, HairColor.S.ordinal)),
+                listOf(0, 1)
+            ),
 
-        Subrace(context.getString(R.string.northen_pontid), Range(0.77f, 0.809f), Range(0.88f, 100f), Range(0f, 0.699f),
-        listOf(1,3), listOf(1,2), listOf(1), listOf(1), listOf(1), listOf(1), listOf(0), listOf(0), (0..10).toList(), listOf(Range(HairColor.H.ordinal, HairColor.S.ordinal)), listOf(0,1)),
+            Subrace(
+                context.getString(R.string.dinarid),
+                2,
+                2,
+                listOf(0),
+                listOf(2),
+                listOf(1),
+                listOf(1),
+                listOf(0, 1),
+                listOf(1, 2),
+                listOf(0),
+                listOf(1),
+                listOf(2),
+                (15..17).toList(),
+                listOf(Range(HairColor.O.ordinal, HairColor.Y.ordinal)),
+                listOf(2)
+            ),
 
-        Subrace(context.getString(R.string.dinarid), Range(0.81f, 100f), Range(0.88f, 100f), Range(0f, 0.699f),
-        listOf(2), listOf(1), listOf(1), listOf(0,1), listOf(1,2), listOf(0), listOf(1), listOf(2), (15..17).toList(), listOf(Range(HairColor.O.ordinal, HairColor.Y.ordinal)), listOf(2)),
+            Subrace(
+                context.getString(R.string.norik),
+                2,
+                2,
+                listOf(0),
+                listOf(1, 2),
+                listOf(1, 2),
+                listOf(1),
+                listOf(0, 1),
+                listOf(1),
+                listOf(0),
+                listOf(0, 1),
+                listOf(0),
+                (0..4).toList() + (8..15).toList(),
+                listOf(Range(HairColor.E.ordinal, HairColor.O.ordinal)),
+                listOf(0, 1, 2)
+            ),
 
-        Subrace(context.getString(R.string.norik), Range(0.81f, 100f), Range(0.88f, 100f), Range(0f, 0.699f),
-        listOf(1,2), listOf(1,2), listOf(1), listOf(0,1), listOf(1), listOf(0), listOf(0,1), listOf(0), (0..4).toList() + (8..15).toList(), listOf(Range(HairColor.E.ordinal, HairColor.O.ordinal)), listOf(0,1,2)),
+            Subrace(
+                context.getString(R.string.armenid),
+                2,
+                0,
+                listOf(0),
+                listOf(2),
+                listOf(1),
+                listOf(1),
+                listOf(0),
+                listOf(0),
+                listOf(0),
+                listOf(2),
+                listOf(2),
+                (15..19).toList(),
+                listOf(Range(HairColor.X.ordinal, HairColor.Y.ordinal)),
+                listOf(2)
+            ),
 
-        Subrace(context.getString(R.string.armenid), Range(0.81f, 100f), Range(0f, 0.8399f), Range(0f, 0.699f),
-        listOf(2), listOf(1), listOf(1), listOf(0), listOf(0), listOf(0), listOf(2), listOf(2), (15..19).toList(), listOf(Range(HairColor.X.ordinal, HairColor.Y.ordinal)), listOf(2)),
+            Subrace(
+                context.getString(R.string.caspid),
+                1,
+                1,
+                listOf(1),
+                listOf(1, 2),
+                listOf(1),
+                listOf(1),
+                listOf(2),
+                listOf(1, 2),
+                listOf(0),
+                listOf(1),
+                listOf(2),
+                (18..19).toList(),
+                listOf(Range(HairColor.O.ordinal, HairColor.Y.ordinal)),
+                listOf(2)
+            ),
 
-        Subrace(context.getString(R.string.caspid), Range(0.77f, 0.809f), Range(0.84f, 0.879f), Range(0.7f, 0.849f),
-        listOf(1,2), listOf(1), listOf(1), listOf(2), listOf(1,2), listOf(0), listOf(1), listOf(2), (18..19).toList(), listOf(Range(HairColor.O.ordinal, HairColor.Y.ordinal)), listOf(2)),
+            Subrace(
+                context.getString(R.string.caucasid),
+                2,
+                1,
+                listOf(0),
+                listOf(1, 2),
+                listOf(0, 1),
+                listOf(1),
+                listOf(1),
+                listOf(1),
+                listOf(2),
+                listOf(2),
+                listOf(0, 1, 2),
+                (6..7).toList() + (15..17).toList(),
+                listOf(
+                    Range(HairColor.O.ordinal, HairColor.Y.ordinal),
+                    Range(HairColor.i.ordinal, HairColor.vi.ordinal)
+                ),
+                listOf(0)
+            ),
 
-        Subrace(context.getString(R.string.caucasid), Range(0.81f, 100f), Range(0.84f, 0.879f), Range(0f, 0.699f),
-        listOf(1,2), listOf(0,1), listOf(1), listOf(1), listOf(1), listOf(2), listOf(2), listOf(0,1,2), (6..7).toList() + (15..17).toList(), listOf(Range(HairColor.O.ordinal, HairColor.Y.ordinal), Range(HairColor.i.ordinal, HairColor.vi.ordinal)), listOf(0)),
+            Subrace(
+                context.getString(R.string.iranid),
+                1,
+                2,
+                listOf(0),
+                listOf(2),
+                listOf(1, 2),
+                listOf(1),
+                listOf(2),
+                listOf(1),
+                listOf(0),
+                listOf(0),
+                listOf(2),
+                (15..19).toList(),
+                listOf(Range(HairColor.X.ordinal, HairColor.Y.ordinal)),
+                listOf(2)
+            ),
 
-        Subrace(context.getString(R.string.iranid), Range(0.77f, 0.809f), Range(0.88f, 100f), Range(0f, 0.699f),
-        listOf(2), listOf(1,2), listOf(1), listOf(2), listOf(1), listOf(0), listOf(0), listOf(2), (15..19).toList(), listOf(Range(HairColor.X.ordinal, HairColor.Y.ordinal)), listOf(2)),
+            Subrace(
+                context.getString(R.string.arabid),
+                0,
+                1,
+                listOf(0),
+                listOf(1, 2),
+                listOf(1, 2),
+                listOf(1),
+                listOf(2),
+                listOf(1),
+                listOf(0),
+                listOf(0),
+                listOf(2),
+                (17..18).toList(),
+                listOf(Range(HairColor.X.ordinal, HairColor.Y.ordinal)),
+                listOf(2)
+            ),
 
-        Subrace(context.getString(R.string.arabid), Range(0f, 0.769f), Range(0.84f, 0.879f), Range(0f, 0.699f),
-        listOf(1,2), listOf(1,2), listOf(1), listOf(2), listOf(1), listOf(0), listOf(0), listOf(2), (17..18).toList(), listOf(Range(HairColor.X.ordinal, HairColor.Y.ordinal)), listOf(2)),
-
-        Subrace(context.getString(R.string.indid), Range(0f, 0.769f), Range(0.84f, 0.879f), Range(0.7f, 0.849f),
-        listOf(1), listOf(2), listOf(0), listOf(2), listOf(1), listOf(1), listOf(0), listOf(2), (6..7).toList() + (15..17).toList(), listOf(Range(HairColor.T.ordinal, HairColor.Y.ordinal)), listOf(0))
-    )
+            Subrace(
+                context.getString(R.string.indid),
+                0,
+                1,
+                listOf(1),
+                listOf(1),
+                listOf(2),
+                listOf(0),
+                listOf(2),
+                listOf(1),
+                listOf(1),
+                listOf(0),
+                listOf(2),
+                (6..7).toList() + (15..17).toList(),
+                listOf(Range(HairColor.T.ordinal, HairColor.Y.ordinal)),
+                listOf(0)
+            )
+        )
+    }
 
     //ПРИМЕЧАНИЯ:
     //Обрати внимание: помещая строку (делай без context.getString(R.string.<Name>), это я потом сам сделаю),
