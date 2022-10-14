@@ -2,30 +2,25 @@ package com.reolight.raceidentity
 
 
 import android.Manifest
+import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.*
-import android.media.Image
+import android.graphics.PointF
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.*
-import androidx.camera.core.Camera
 import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.camera.video.Recorder
-import androidx.camera.video.Recording
-import androidx.camera.video.VideoCapture
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.component1
-import androidx.core.graphics.minus
-import androidx.core.graphics.toRectF
+import androidx.core.content.ContextCompat.startActivity
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.face.*
 import com.reolight.raceidentity.databinding.ActivityCameraBinding
-import java.io.ByteArrayOutputStream
-import java.nio.ByteBuffer
+import com.reolight.raceidentity.support.FaceParams
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import kotlin.math.pow
@@ -38,9 +33,11 @@ class CameraActivity : AppCompatActivity() {
     private lateinit var imageCapture: ImageCapture
     private lateinit var viewBinding: ActivityCameraBinding
     private lateinit var camera: Camera
+    private lateinit var faceParams: FaceParams
 
-    private class Analyzer : ImageAnalysis.Analyzer {
+    private class FaceAnalyzer(val binding: ActivityCameraBinding, var faceParams: FaceParams) : ImageAnalysis.Analyzer {
         private var detector : FaceDetector
+
         init {
             val options = FaceDetectorOptions.Builder()
                 .setContourMode(FaceDetectorOptions.CONTOUR_MODE_ALL)
@@ -52,44 +49,53 @@ class CameraActivity : AppCompatActivity() {
             sqrt((point1.x - point2.x).pow(2) + (point1.y - point2.y).pow(2))
 
         private fun onSuccessfulRecognitionProcessFirstFace(face: Face?){
-            face?.run {
-                val noseWidth = getDistance(
-                    allContours[FaceContour.NOSE_BOTTOM].points.first(),
-                    allContours[FaceContour.NOSE_BOTTOM].points.last()
-                )
-                val noseHeight = getDistance(
-                    allContours[FaceContour.NOSE_BRIDGE].points.first(),
-                    allContours[FaceContour.NOSE_BRIDGE].points.last()
-                )
-                val skullHeight = face.boundingBox.height()
-                val height2 = getDistance(
-                    allContours[FaceContour.FACE].points.first(),
-                    allContours[FaceContour.FACE].points[18]
-                )
-                val height1 = getDistance(
-                    allContours[FaceContour.FACE].points[18],
-                    PointF(
-                        (allContours[FaceContour.LEFT_EYEBROW_BOTTOM].points.last().x +
-                                allContours[FaceContour.RIGHT_EYEBROW_BOTTOM].points.last().x) / 2,
-                        (allContours[FaceContour.LEFT_EYEBROW_BOTTOM].points.last().y +
-                                allContours[FaceContour.RIGHT_EYEBROW_BOTTOM].points.last().y) / 2)
+            face?.let { f ->
+                faceParams = FaceParams().apply {
+                    noseWidth = getDistance(
+                        f.allContours[FaceContour.NOSE_BOTTOM].points.first(),
+                        f.allContours[FaceContour.NOSE_BOTTOM].points.last()
                     )
-                val faceWidth = getDistance(
-                    allContours[FaceContour.FACE].points[8],
-                    allContours[FaceContour.FACE].points[28]
-                )
+                     noseHeight = getDistance(
+                         f.allContours[FaceContour.NOSE_BRIDGE].points.first(),
+                         f.allContours[FaceContour.NOSE_BRIDGE].points.last()
+                    )
+                    val skullHeight = f.boundingBox.height().toFloat()
+                    height2 = getDistance(
+                        f.allContours[FaceContour.FACE].points.first(),
+                        f.allContours[FaceContour.FACE].points[18]
+                    )
+                    height1 = getDistance(
+                        f.allContours[FaceContour.FACE].points[18],
+                        PointF(
+                            (f.allContours[FaceContour.LEFT_EYEBROW_BOTTOM].points.last().x +
+                                    f.allContours[FaceContour.RIGHT_EYEBROW_BOTTOM].points.last().x) / 2,
+                            (f.allContours[FaceContour.LEFT_EYEBROW_BOTTOM].points.last().y +
+                                    f.allContours[FaceContour.RIGHT_EYEBROW_BOTTOM].points.last().y) / 2
+                        )
+                    )
+                    faceWidth = getDistance(
+                        f.allContours[FaceContour.FACE].points[8],
+                        f.allContours[FaceContour.FACE].points[28]
+                    )
 
-                val foreheadH = skullHeight - height1
+                    foreheadHeight = skullHeight - height1
+                }
+
+                with(binding.confirmButton) {
+                    visibility = View.VISIBLE
+                }
             }
         }
 
         @androidx.camera.core.ExperimentalGetImage
         override fun  analyze(imageProxy: ImageProxy) {
+            if (binding.confirmButton.visibility != View.GONE){
             imageProxy.image?.let { img ->
                 val image = InputImage.fromMediaImage(img, imageProxy.imageInfo.rotationDegrees)
                 detector.process(image).addOnSuccessListener { faces ->
                     onSuccessfulRecognitionProcessFirstFace(faces.first())
                 }
+            }
             }
         }
     }
@@ -128,6 +134,16 @@ class CameraActivity : AppCompatActivity() {
 
             val imageAnalyze = ImageAnalysis.Builder()
                 .build()
+                .also {
+                    it.setAnalyzer(cameraExecutor, FaceAnalyzer(viewBinding, faceParams))
+                }
+
+            viewBinding.confirmButton.setOnClickListener(){
+                val intent = Intent(this, ChartActivity::class.java)
+                intent.putExtra(FaceParams::class.simpleName, faceParams)
+                startActivity(intent)
+                this.finish()
+            }
 
             try{
                 cameraProvider.unbindAll()
@@ -176,10 +192,6 @@ class CameraActivity : AppCompatActivity() {
             mutableListOf(
                 Manifest.permission.CAMERA,
                 Manifest.permission.RECORD_AUDIO
-            ).apply {
-                if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P){
-                    add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                }
-            }.toTypedArray()
+            ).toTypedArray()
     }
 }

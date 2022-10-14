@@ -1,10 +1,9 @@
 package com.reolight.raceidentity.support
 
 import android.content.Context
-import android.util.Range
-import com.reolight.raceidentity.support.enums.HairColor
 
-class Charter {
+class Charter{
+
     var kefalIndex: Int? = null
         private var _skullWidth: Float? = null
         private var _skullHeight: Float? = null
@@ -58,6 +57,15 @@ class Charter {
         _noseLength = noseL;     _noseWidth = noseW
         _foreheadHeight = foreH; _faceHeight2 = faceH2
         calcIndexes()
+    }
+
+    fun updateVals(faceParams: FaceParams){
+        _faceHeight1 = faceParams.height1
+        _faceHeight2 = faceParams.height2
+        _foreheadHeight = faceParams.foreheadHeight
+        _faceWidth = faceParams.faceWidth
+        _noseLength = faceParams.noseHeight
+        _noseWidth = faceParams.noseWidth
     }
 
     fun calculate(context: Context){

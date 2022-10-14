@@ -1,15 +1,19 @@
 package com.reolight.raceidentity
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.widget.*
+import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.reolight.raceidentity.support.Charter
+import com.reolight.raceidentity.support.FaceParams
 import com.reolight.raceidentity.support.spinners.ColorSpinner
 import com.reolight.raceidentity.support.spinners.SpinnerAdaptable
 import com.reolight.raceidentity.support.spinners.SpinnerColorListener
-import java.lang.NumberFormatException
 import kotlin.reflect.KMutableProperty0
 
 class ChartActivity : AppCompatActivity() {
@@ -22,6 +26,18 @@ class ChartActivity : AppCompatActivity() {
         charter = Charter()
         setSpinners()
         findViewById<Button>(R.id.ChartDoneButton).setOnClickListener(::onDone)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val data: FaceParams?
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+            data = intent.getSerializableExtra(FaceParams::class.simpleName, FaceParams::class.java)
+        else
+            data = intent.getSerializableExtra(FaceParams::class.simpleName) as FaceParams?
+        data?.let {
+            charter.updateVals(data)
+        }
     }
 
     private fun onDone(view: View) {
