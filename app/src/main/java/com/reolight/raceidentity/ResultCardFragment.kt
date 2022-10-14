@@ -17,7 +17,7 @@ import com.reolight.raceidentity.support.Subraces
  * Use the [ResultCardFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ResultCardFragment : Fragment() {
+class ResultCardFragment : androidx.fragment.app.Fragment() {
     private var subrace: String? = null
     private var subraceObj : Subrace? = null
     private var score: Int? = null
@@ -39,11 +39,11 @@ class ResultCardFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentResultCardBinding.inflate(layoutInflater)
-        val perc = (score!!.toFloat() / Subrace.SCORE_MAX * 100 ).toInt()
+        val percent = (score!!.toFloat() / Subrace.SCORE_MAX * 100 ).toInt()
         with(_binding){
-            SubraceNameText.text = "$subrace ($perc%)" // FIXME: Здесь короче можно в коде субрасс добавлять не строку, а АйДи на неё и избавиться от "хард" кодед стринг. Ну не гений ли я?
-            SubraceScoreBar.progress = perc
-
+            //doesn't work another way... doesn't change despite Locale, so, why should I place it to res files and have headache?
+            SubraceNameText.text = "$subrace (${percent}%)"
+            SubraceScoreBar.progress = percent
         }
 
         _binding.ResultCard.setOnClickListener() {

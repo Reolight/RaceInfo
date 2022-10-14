@@ -3,7 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Documentos/PRO/Android/MyApplication/app/src/main/res/layout/activity_camera.xml" value="0.2" />
+        <entry key="..\:/Documentos/PRO/Android/MyApplication/app/src/main/res/layout/activity_camera.xml" value="0.264" />
         <entry key="..\:/Documentos/PRO/Android/MyApplication/app/src/main/res/layout/activity_chart.xml" value="0.25417130144605116" />
         <entry key="..\:/Documentos/PRO/Android/MyApplication/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Documentos/PRO/Android/MyApplication/app/src/main/res/layout/activity_result.xml" value="0.23802083333333332" />
@@ -14,7 +14,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

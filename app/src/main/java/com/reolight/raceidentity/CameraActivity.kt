@@ -2,70 +2,95 @@ package com.reolight.raceidentity
 
 
 import android.Manifest
-import android.content.ContentValues
 import android.content.pm.PackageManager
+import android.graphics.*
+import android.media.Image
 import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.camera.core.ImageCapture
+import androidx.camera.core.*
+import androidx.camera.core.Camera
+import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.video.Recorder
 import androidx.camera.video.Recording
 import androidx.camera.video.VideoCapture
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.component1
+import androidx.core.graphics.minus
+import androidx.core.graphics.toRectF
+import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.face.*
+import com.reolight.raceidentity.databinding.ActivityCameraBinding
+import java.io.ByteArrayOutputStream
+import java.nio.ByteBuffer
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
-import android.widget.Toast
-import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.camera.core.Preview
-import androidx.camera.core.CameraSelector
-import android.util.Log
-import androidx.camera.core.ImageAnalysis
-import androidx.camera.core.ImageCaptureException
-import androidx.camera.core.ImageProxy
-import androidx.camera.video.FallbackStrategy
-import androidx.camera.video.MediaStoreOutputOptions
-import androidx.camera.video.Quality
-import androidx.camera.video.QualitySelector
-import androidx.camera.video.VideoRecordEvent
-import androidx.camera.video.internal.compat.Api23Impl.build
-import androidx.core.content.PermissionChecker
-import androidx.core.content.contentValuesOf
-import com.reolight.raceidentity.databinding.ActivityCameraBinding
-import java.nio.ByteBuffer
-import java.text.SimpleDateFormat
-import java.util.Locale
+import kotlin.math.pow
+import kotlin.math.sqrt
 
 
 typealias LumaListener = (luma: Double) -> Unit
 
 class CameraActivity : AppCompatActivity() {
-
     private lateinit var imageCapture: ImageCapture
     private lateinit var viewBinding: ActivityCameraBinding
+    private lateinit var camera: Camera
 
-    private var videoCapture : VideoCapture<Recorder>? = null
-    private var recording : Recording? = null
-
-    private class LuminosityAnalizer(private val listener: LumaListener) : ImageAnalysis.Analyzer
-    {
-        private fun ByteBuffer.toByteArray(): ByteArray{
-            rewind()
-            val data = ByteArray(remaining())
-            get(data)
-            return data
+    private class Analyzer : ImageAnalysis.Analyzer {
+        private var detector : FaceDetector
+        init {
+            val options = FaceDetectorOptions.Builder()
+                .setContourMode(FaceDetectorOptions.CONTOUR_MODE_ALL)
+                .build()
+            detector = FaceDetection.getClient(options)
         }
 
-        override fun analyze(image: ImageProxy) {
-            val buffer = image.planes[0].buffer
-            val data = buffer.toByteArray()
-            val pixels = data.map { it.toInt() and 0xFF }
-            val luma = pixels.average()
+        fun getDistance(point1: PointF, point2: PointF): Float =
+            sqrt((point1.x - point2.x).pow(2) + (point1.y - point2.y).pow(2))
 
-            listener(luma)
+        private fun onSuccessfulRecognitionProcessFirstFace(face: Face?){
+            face?.run {
+                val noseWidth = getDistance(
+                    allContours[FaceContour.NOSE_BOTTOM].points.first(),
+                    allContours[FaceContour.NOSE_BOTTOM].points.last()
+                )
+                val noseHeight = getDistance(
+                    allContours[FaceContour.NOSE_BRIDGE].points.first(),
+                    allContours[FaceContour.NOSE_BRIDGE].points.last()
+                )
+                val skullHeight = face.boundingBox.height()
+                val height2 = getDistance(
+                    allContours[FaceContour.FACE].points.first(),
+                    allContours[FaceContour.FACE].points[18]
+                )
+                val height1 = getDistance(
+                    allContours[FaceContour.FACE].points[18],
+                    PointF(
+                        (allContours[FaceContour.LEFT_EYEBROW_BOTTOM].points.last().x +
+                                allContours[FaceContour.RIGHT_EYEBROW_BOTTOM].points.last().x) / 2,
+                        (allContours[FaceContour.LEFT_EYEBROW_BOTTOM].points.last().y +
+                                allContours[FaceContour.RIGHT_EYEBROW_BOTTOM].points.last().y) / 2)
+                    )
+                val faceWidth = getDistance(
+                    allContours[FaceContour.FACE].points[8],
+                    allContours[FaceContour.FACE].points[28]
+                )
 
-            image.close()
+                val foreheadH = skullHeight - height1
+            }
+        }
+
+        @androidx.camera.core.ExperimentalGetImage
+        override fun  analyze(imageProxy: ImageProxy) {
+            imageProxy.image?.let { img ->
+                val image = InputImage.fromMediaImage(img, imageProxy.imageInfo.rotationDegrees)
+                detector.process(image).addOnSuccessListener { faces ->
+                    onSuccessfulRecognitionProcessFirstFace(faces.first())
+                }
+            }
         }
     }
 
@@ -84,49 +109,8 @@ class CameraActivity : AppCompatActivity() {
                 this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS)
         }
 
-        viewBinding.imageCaptureButton.setOnClickListener { takePhoto()}
-        viewBinding.videoCaptureButton.setOnClickListener { captureVideo()}
-
         cameraExecutor = Executors.newSingleThreadExecutor()
     }
-
-
-    private fun takePhoto() {
-        val imageCapture = imageCapture ?: return
-
-        val name = SimpleDateFormat(FILENAME_FORMAT, Locale.US)
-            .format(System.currentTimeMillis())
-        val contentValues = ContentValues().apply {
-            put(MediaStore.MediaColumns.DISPLAY_NAME, name)
-            put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
-            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P){
-                put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/CameraX-image")
-            }
-        }
-
-        val outputOptions = ImageCapture.OutputFileOptions
-            .Builder(contentResolver, MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                contentValues)
-            .build()
-
-        imageCapture.takePicture(
-            outputOptions,
-            ContextCompat.getMainExecutor(this),
-            object : ImageCapture.OnImageSavedCallback {
-                override fun onError(exc: ImageCaptureException) {
-                    Log.e(TAG, "Фото капчер файлед: ${exc.message}", exc)
-                }
-
-                override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                    val msg = "Фото капчер саксид"
-                    Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
-                    Log.d(TAG, msg)
-                }
-            }
-        )
-    }
-
-    private fun captureVideo() {}
 
     private fun startCamera(){
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
@@ -137,24 +121,17 @@ class CameraActivity : AppCompatActivity() {
             val preview = Preview.Builder()
                 .build()
                 .also {
-                    it.setSurfaceProvider(viewBinding.viewFinder.surfaceProvider)
+                    it.setSurfaceProvider(viewBinding.previewView.surfaceProvider)
                 }
-
-            imageCapture = ImageCapture.Builder().build()
 
             val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
             val imageAnalyze = ImageAnalysis.Builder()
                 .build()
-                .also {
-                    it.setAnalyzer(cameraExecutor, LuminosityAnalizer {
-                            luma -> Log.d(TAG, "Luma: $luma")
-                    })
-                }
 
             try{
                 cameraProvider.unbindAll()
-                cameraProvider.bindToLifecycle(
+                camera = cameraProvider.bindToLifecycle(
                     this, cameraSelector, preview, imageCapture, imageAnalyze)
             } catch (exc: Exception){
                 Log.e(TAG, "Юз кейз биндинг файлед", exc)
